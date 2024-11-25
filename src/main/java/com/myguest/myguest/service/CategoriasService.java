@@ -28,8 +28,11 @@ public class CategoriasService {
         Categorias categorias = categoriasRepository.findById(catId)
                 .orElseThrow(() -> new RuntimeException("Categoria não encontrada!"));
 
-        categorias.setNomeCat(dto.getNome());
-        categorias.setDescricaoCat(dto.getDescricao());
+        if (!dto.getNome().isBlank())
+            categorias.setNomeCat(dto.getNome());
+
+        if (!dto.getDescricao().isBlank())
+            categorias.setDescricaoCat(dto.getDescricao());
 
         categoriasRepository.save(categorias);
     }
